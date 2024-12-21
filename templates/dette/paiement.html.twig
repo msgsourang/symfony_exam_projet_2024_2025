@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Paiement{% endblock %}
+
+{% block body %}
+    <div class="p-8">
+        <h1 class="text-3xl font-bold mb-4">Détails du Paiement pour la Dette ID: {{ dette.id }}</h1>
+
+        <h2 class="text-xl font-semibold mb-4">Montant restant: {{ dette.montantRestant }}</h2>
+
+        <h3 class="text-lg font-semibold">Ajouter un Paiement</h3>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Ajouter Paiement</button>
+        {{ form_end(form) }}
+
+        <h3 class="text-lg font-semibold mt-6">Liste des Paiements</h3>
+        <table class="min-w-full bg-white border border-gray-200 mt-2">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">ID</th>
+                    <th class="py-3 px-6 text-left">Date</th>
+                    <th class="py-3 px-6 text-left">Montant</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700 text-sm font-light">
+                {% for paiement in paiements %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6">{{ paiement.id }}</td>
+                        <td class="py-3 px-6">{{ paiement.date|date('d/m/Y H:i') }}</td>
+                        <td class="py-3 px-6">{{ paiement.montant }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="py-3 px-6 text-left">Aucun paiement trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Client{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center h-screen">
+        <div class="p-8 bg-white shadow-md rounded-lg w-full max-w-md">
+            <h1 class="text-3xl font-bold mb-4 text-center">Ajouter un Client</h1>
+
+            <form action="{{ path('client_add') }}" method="post">
+                <div class="mb-4">
+                    <label for="nom" class="block text-gray-700">Nom:</label>
+                    <input type="text" name="nom" id="nom" required 
+                           class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                </div>
+
+                <div class="mb-4">
+                    <label for="prenom" class="block text-gray-700">Prénom:</label>
+                    <input type="text" name="prenom" id="prenom" required 
+                           class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                </div>
+
+                <div class="mb-4">
+                    <label for="surname">Surame:</label>
+                    <input type="text" id="surname" name="surname" required
+                            class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                </div>
+
+                <div class="mb-4">
+                    <label for="telephone" class="block text-gray-700">Téléphone:</label>
+                    <input type="text" name="telephone" id="telephone" required 
+                           class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                </div>
+
+                <div class="mb-4">
+                    <label for="adresse" class="block text-gray-700">Adresse:</label>
+                    <input type="text" name="adresse" id="adresse" required 
+                           class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                </div>
+
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="create_user_account" name="create_user_account" class="mr-2">
+                        Créer un compte utilisateur associé
+                    </label>
+                </div>
+
+
+                <div id="user_fields" style="display: none;">
+                    <div class="mb-4">
+                        <label for="login" class="block text-gray-700">Login:</label>
+                        <input type="text" name="login" id="login" 
+                               class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="block text-gray-700">Mot de passe:</label>
+                        <input type="password" name="password" id="password" 
+                               class="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    </div>
+                </div>
+
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
+                    Ajouter Client
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('create_user_account').addEventListener('change', function() {
+            document.getElementById('user_fields').style.display = this.checked ? 'block' : 'none';
+            if (!this.checked) {
+                document.getElementById('login').value = '';
+                document.getElementById('password').value = '';
+            }
+        });
+    </script>
+{% endblock %}

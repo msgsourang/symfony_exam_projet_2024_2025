@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Dette{% endblock %}
+
+{% block body %}
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="w-full max-w-lg bg-white p-8 rounded shadow-lg">
+            <h1 class="text-3xl font-bold mb-4 text-center">Ajouter une Dette pour {{ client.surname }}</h1>
+
+            {{ form_start(form) }}
+                <div class="mb-4">
+                    {{ form_label(form.montant, 'Montant', {'label_attr': {'class': 'block text-gray-700'}}) }}
+                    {{ form_widget(form.montant, {'attr': {'class': 'border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                </div>
+                
+                <div class="mb-4">
+                    {{ form_label(form.date, 'Date', {'label_attr': {'class': 'block text-gray-700'}}) }}
+                    {{ form_widget(form.date, {'attr': {'class': 'border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                </div>
+                
+                <div class="mb-4">
+                    {{ form_label(form.montantVerser, 'Montant Versé', {'label_attr': {'class': 'block text-gray-700'}}) }}
+                    {{ form_widget(form.montantVerser, {'attr': {'class': 'border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                </div>
+
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
+                    Ajouter Dette
+                </button>
+            {{ form_end(form) }}
+
+            {% if app.session.flashBag.has('success') %}
+                <div class="mt-4 text-green-600">
+                    {{ app.session.flashBag.get('success')[0] }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

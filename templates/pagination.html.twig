@@ -1,0 +1,23 @@
+<div class="flex justify-center mt-4">
+    {% if clients.getCurrentPage() > 1 %}
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({page: clients.getCurrentPage() - 1, surname: surnameFilter, telephone: telephoneFilter})) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            Précédent
+        </a>
+    {% endif %}
+
+    {% for page in 1..clients.getPageCount() %}
+        {% if page == clients.getCurrentPage() %}
+            <span class="bg-blue-500 text-white font-bold py-2 px-4 rounded">{{ page }}</span>
+        {% else %}
+            <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({page: page, surname: surnameFilter, telephone: telephoneFilter})) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
+                {{ page }}
+            </a>
+        {% endif %}
+    {% endfor %}
+
+    {% if clients.getCurrentPage() < clients.getPageCount() %}
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({page: clients.getCurrentPage() + 1, surname: surnameFilter, telephone: telephoneFilter})) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+            Suivant
+        </a>
+    {% endif %}
+</div>

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dettes de {{ client.surname }}{% endblock %}
+
+{% block body %}
+    <div class="p-8">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h1 class="text-2xl font-bold">Surname: {{ client.surname }}</h1>
+                <h1 class="text-2xl font-bold">Tel: {{ client.telephone }}</h1>
+                <h1 class="text-2xl font-bold">Adresse: {{ client.adresse }}</h1>
+            </div>
+            <div class="text-right">
+                <span class="text-xl font-bold">Total Due: {{ totalDue }} Fcfa</span>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <a href="{{ path('dette_add', {clientId: client.id}) }}" class="text-blue-500 hover:underline">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">
+                    Ajouter Dette
+                </button>
+            </a>
+        </div>
+
+        {% if dettes|length > 0 %}
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Montant</th>
+                        <th class="py-3 px-6 text-left">Date</th>
+                        <th class="py-3 px-6 text-left">Montant Versé</th>
+                        <th class="py-3 px-6 text-left">Montant Restant</th>
+                        <th class="py-3 px-6 text-left">Statut</th> 
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-sm font-light">
+                    {% for dette in dettes %}
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">{{ dette.montant }} Fcfa</td>
+                            <td class="py-3 px-6 text-left">{{ dette.date|date('d-m-Y') }}</td>
+                            <td class="py-3 px-6 text-left">{{ dette.montantVerser }} Fcfa</td>
+                            <td class="py-3 px-6 text-left">{{ dette.getMontantRestant() }} Fcfa</td>
+                            <td class="py-3 px-6 text-left">{{ dette.statut }}</td> 
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune dette trouvée pour ce client.</p>
+        {% endif %}
+    </div>
+{% endblock %}

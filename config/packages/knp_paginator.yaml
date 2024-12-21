@@ -1,0 +1,4 @@
+# config/packages/knp_paginator.yaml
+knp_paginator:
+    template:
+        pagination: 'bundles/KnpPaginatorBundle/tailwindcss_pagination.html.twig'
